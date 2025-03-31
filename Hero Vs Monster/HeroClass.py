@@ -5,12 +5,14 @@ class Hero:
     def __init__(self, name):
         self.name = name
         self.health = 10
-        self.strength = random.randint(1, 5)
+        self.level = 1
+        self.strength = random.randint(1, 5) + self.level
         self.armor = random.randint(11, 18)
         self.experience = 0
         self.isDefeated = False
         self.aim = random.randint(1, 20) + self.strength
         self.initiative = 0
+        
 
     def attack(self):
         self.damage = random.randint(1, 6)
@@ -41,6 +43,7 @@ class Hero:
         self.health += self.level
         self.strength += self.level
         self.armor += self.level
+        self.experience -= 10
         print(f"{self.name} leveled up! New level: {self.level}")
         print(f"New stats: Health: {self.health}, Strength: {self.strength}, Armor: {self.armor}")
         

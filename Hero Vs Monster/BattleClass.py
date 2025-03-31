@@ -4,13 +4,12 @@ import time
 class Battle:  # Capitalized class name as per convention
 
     def battleStart(self, Player, Enemy):
-        dayIsSaved = False
 
         print(f"{Player.name} encounters a {Enemy.name}!")
         print(f"{Player.name} Health: {Player.health}, Armor: {Player.armor}")
         print(f"{Enemy.name} Health: {Enemy.health}, Armor: {Enemy.armor}\n")
 
-        while Player.is_alive() and not dayIsSaved:
+        while not Player.isDefeated:
             Player.rollInitiative()
             Enemy.rollInitiative()
 
@@ -21,19 +20,22 @@ class Battle:  # Capitalized class name as per convention
 
                 if Enemy.isDefeated:
                     Player.gain_exp(Enemy.experience)
+                    if Player.experience >= 10:
+                        Player.levelUp()
                     break
 
                 if self.hitCheckEnemy(Player, Enemy):
                     self.enemyAttack(Player, Enemy)
 
-                if not Player.is_alive():
+                if not Player.isDefeated:
                     break
             else:
                 print(f"{Enemy.name} attacks first!")
                 if self.hitCheckEnemy(Player, Enemy):
                     self.enemyAttack(Player, Enemy)
 
-                if not Player.is_alive():
+                if Player.isDefeated:
+                    print(f"{Player.name} has been defeated!")
                     break
 
                 if self.hitCheckPlayer(Player, Enemy):
