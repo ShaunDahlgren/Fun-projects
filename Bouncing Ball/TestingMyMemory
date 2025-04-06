@@ -1,0 +1,14 @@
+import tkinter
+from tkinter import messagebox
+
+def find_max(numbers):
+    try:
+        largest = numbers[0]
+        for num in numbers:
+            if num > largest:
+                largest = num
+        return largest
+    except TypeError:
+        messagebox.showerror("Error", "Invalid input: Please provide a list of numbers.")
+print(f" The maximum number is: {find_max([100, 12, 1, -1, -101])}")
+        
